@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Tesis-RRA</string>
+    <string name="enter_email"> E-mail  </string>
+
+
+    //Strings Loguin
+    <string name="buttonIniciarSesion">Iniciar Sesión</string>
+    <string name="buttonRegistrarte">Registrarte</string>
+    <string name="buttonIniciarSesionMaestro">Iniciar Sesión (Maestro)</string>
+    <string name="imageViewUV"></string>
+    <string name="editTextContrasena">Universidad Veracruzana</string>
+    <string name="textViewUniversidadVeracruzana">Universidad Veracruzana</string>
+    <string name="textViewRegistro">¿Aún no te has registrado? Registrate</string>
+
+
+    //Strings Registro
+    <string name="buttonRegistrarseR">Registrarse</string>
+    <string name="textViewUsuarioR">Nombre de Usuario*</string>
+    <string name="textViewEmailR">Email*</string>
+    <string name="textViewContrasenaR">Contrasena*</string>
+
+
+
+
+
+</resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "779490274159",
+    "firebase_url": "https://tesis-rra.firebaseio.com",
+    "project_id": "tesis-rra",
+    "storage_bucket": "tesis-rra.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779490274159:android:a6e59ccce1f32c83ddd69a",
+        "android_client_info": {
+          "package_name": "com.example.tesis_rra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "779490274159-1kfr6hrtqopajakqn6helda6l4egqpo0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB35yzZLQM84cskxoupdHjJuPdCVBrPBpc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "779490274159-1kfr6hrtqopajakqn6helda6l4egqpo0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
