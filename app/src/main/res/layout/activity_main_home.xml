@@ -4,4 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home"/>
+        tools:context=".Home">
+
+   /*
+
+   <include
+       android:id="@+id/miToolBar"
+       layout="@layout/tool_bar"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="1.0"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.45"></include>
+
+   <Button
+       android:id="@+id/buttonCerrarSesion"
+       android:layout_width="125dp"
+       android:layout_height="41dp"
+       android:background="@android:color/holo_red_dark"
+       android:text="Cerrar Sesion"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.95"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.102" />
+   */
+</androidx.constraintlayout.widget.ConstraintLayout>
+

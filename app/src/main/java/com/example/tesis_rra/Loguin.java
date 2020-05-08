@@ -17,20 +17,27 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Loguin extends AppCompatActivity {
 
     private EditText TextEmail;
     private EditText TextContrasena;
-    private Button btnIniciarAlumno;
+    private Button btnIniciarSesion;
     private Button btnIniciarMaestro;
     private Button btnRegistrar;
-    private ProgressDialog progressDialog;
+    private Button btnHome;
+
 
     //Declaración de un objeto FirebaseAuth
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth mAuth;
+    DatabaseReference mDatabase;
 
-
+    //Variables para iniciar sesion
+    private String email = " ";
+    private String contrasena = " ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,71 +45,56 @@ public class Loguin extends AppCompatActivity {
         setContentView(R.layout.activity_main_loguin);
 
         //Inicializamos el objeto FirebaseAuth
-        firebaseAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        TextEmail = (EditText) findViewById(R.id.editTextEmail1);
-        TextContrasena = (EditText) findViewById(R.id.editTextContrasena);
-
-        btnIniciarAlumno = (Button) findViewById(R.id.buttonIniciarSesion);
-        btnIniciarMaestro = (Button) findViewById(R.id.buttonIniciarSesionMaestro);
+        TextEmail = (EditText) findViewById(R.id.editTextEmailR);
+        TextContrasena = (EditText) findViewById(R.id.editTextContrasenaR);
+        btnIniciarSesion = (Button) findViewById(R.id.buttonIniciarSesion);
         btnRegistrar = (Button) findViewById(R.id.buttonRegistrarte);
+        btnIniciarMaestro = (Button) findViewById(R.id.buttonIniciarSesionMaestro);
 
-        progressDialog = new ProgressDialog(this);
+        btnHome = (Button) findViewById(R.id.buttonHome);
 
-       // btnRegistrar.setOnClickListener(this);
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Loguin.this, HomePrincipal.class));
+            }
+        });
 
+        btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                email = TextContrasena.getText().toString();
+                contrasena = TextContrasena.getText().toString();
 
-
-
-    }
-
-    private void registrarUsuario(){
-        //Obtenemos el email y la contraseña desde las cajas de texto
-        String email = TextEmail.getText().toString().trim();
-        String contrasena = TextContrasena.getText().toString().trim();
-
-        //Verificamos que las cajas de texto no esten vacias
-        if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Se debe ingresar un Email",Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if(TextUtils.isEmpty(contrasena)){
-            Toast.makeText(this,"Se debe ingresar una contraseña",Toast.LENGTH_LONG).show();
-            return;
-        }
-
-
-        progressDialog.setMessage("Realizando registro en linea...");
-        progressDialog.show();
-
-        firebaseAuth.createUserWithEmailAndPassword(email,contrasena)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-
-                            Toast.makeText(Loguin.this,"Se ha registrado el email",Toast.LENGTH_LONG).show();
-                        }else{
-                            Toast.makeText(Loguin.this,"No se pudo registrar el usuario",Toast.LENGTH_LONG).show();
-
-                        }
-                        progressDialog.dismiss();
-                    }
-                });
+                if(!email.isEmpty() && !contrasena.isEmpty()){
+                    loginUser();
+                }
+                else{
+                    Toast.makeText(Loguin.this, "Complete los campos", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
     }
 
-    public void onClick(View view){
-        registrarUsuario();
-
-    }
-
-
-
-    public void onClickIniciarSesion(View view){
-        Intent NextHome = new Intent(this, Home.class);
-        startActivity(NextHome);
+    private void loginUser(){
+        mAuth.signInWithEmailAndPassword(email,contrasena)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    startActivity(new Intent(Loguin.this, Home.class));
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    finish();
+                }
+                else{
+                    Toast.makeText(Loguin.this,"No se puedo iniciar sesion", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public void onClickRegistrarse(View view){
@@ -110,8 +102,7 @@ public class Loguin extends AppCompatActivity {
         startActivity(NextRegistro);
     }
 
-
-
-
-
 }
+
+
+

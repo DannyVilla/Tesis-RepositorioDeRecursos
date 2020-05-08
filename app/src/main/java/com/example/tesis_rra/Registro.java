@@ -62,8 +62,6 @@ public class Registro extends AppCompatActivity {
                         Toast.makeText(Registro.this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show();
 
                     }
-
-
                 }else{
                     Toast.makeText(Registro.this,"Debe completar todos los campos", Toast.LENGTH_SHORT).show();
 
@@ -77,7 +75,6 @@ public class Registro extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-
                     Map<String, Object> map = new HashMap<>();
                     map.put("name", nombre);
                     map.put("email", email);
@@ -89,14 +86,15 @@ public class Registro extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task2) {
                             if(task2.isSuccessful()){
                                 startActivity(new Intent(Registro.this, Loguin.class));
-                                finish();
-                            }else{
-                                Toast.makeText(Registro.this,"No se pudieron crear los datos correctamente", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Registro.this, "Usuario Creado Correctamente", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(Registro.this,"Intentalo nuevamente", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
                 }else{
-                    Toast.makeText(Registro.this,"No se pudo registrar usuario en Firebase", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this,"No se pudo registrar el usuario", Toast.LENGTH_SHORT).show();
                 }
             }
         });

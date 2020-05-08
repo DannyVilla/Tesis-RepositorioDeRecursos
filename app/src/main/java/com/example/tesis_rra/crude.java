@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class crude extends AppCompatActivity {
+public class CRUDE extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
