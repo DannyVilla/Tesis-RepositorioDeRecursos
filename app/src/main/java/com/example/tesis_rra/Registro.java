@@ -81,7 +81,8 @@ public class Registro extends AppCompatActivity {
                     map.put("password", contrasena);
 
                     String id = mAuth.getCurrentUser().getUid();
-                    mDatabase.child("Usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                    mDatabase.getRoot().child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task2) {
                             if(task2.isSuccessful()){

@@ -66,7 +66,7 @@ public class Loguin extends AppCompatActivity {
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                email = TextContrasena.getText().toString();
+                email = TextEmail.getText().toString();
                 contrasena = TextContrasena.getText().toString();
 
                 if(!email.isEmpty() && !contrasena.isEmpty()){
@@ -86,12 +86,12 @@ public class Loguin extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    startActivity(new Intent(Loguin.this, Home.class));
-                    FirebaseUser user = mAuth.getCurrentUser();
+                    startActivity(new Intent(Loguin.this, HomePrincipal.class));
+                    Toast.makeText(Loguin.this,"Inicio de sesión correcto",Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 else{
-                    Toast.makeText(Loguin.this,"No se puedo iniciar sesion", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Loguin.this,"Correo o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                 }
             }
         });

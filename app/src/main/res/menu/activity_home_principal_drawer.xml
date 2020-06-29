@@ -4,17 +4,39 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/ic_menu_perfil"
+            android:title="@string/menu_perfil"/>
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:icon="@drawable/ic_menu_repositorios"
+            android:title="@string/menu_repositorios" />
+
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/menu_home" />
+
+        <item
+            android:id="@+id/nav_ejemplos"
+            android:icon="@drawable/ic_menu_ejemplos"
+            android:title="@string/menu_ejemplos" />
+
+        <item
+            android:id="@+id/nav_configuracion"
+            android:icon="@drawable/ic_menu_configuracion"
+            android:title="@string/menu_configuracion" />
+
+        <item
+            android:id="@+id/nav_informacion"
+            android:icon="@drawable/ic_menu_informacion"
+            android:title="@string/menu_informacion" />
+
+        <item
+            android:id="@+id/nav_cerrar_sesion"
+            android:icon="@drawable/ic_menu_cerrar_sesion"
+            android:title="@string/menu_cerrar_sesion" />
     </group>
 </menu>

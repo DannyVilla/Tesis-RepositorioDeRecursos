@@ -6,4 +6,15 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <item android:id="@+id/menu_home"
+        android:title="Home"
+        android:icon="@mipmap/ic_home"/>
+
+    <item android:id="@+id/menu_profile"
+        android:title="Perfil"
+        android:icon="@mipmap/ic_profile"/>
+
+
+
 </menu>

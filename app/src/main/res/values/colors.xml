@@ -4,4 +4,13 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#4CAF50</color>
     <color name="TextoTitulo">      </color>
+
+    <color name="TextoBotton">#FFFFFF</color>
+
+    //Colores perfil
+    <color name="colorPromaryDarkPerfil">#292B3D</color>
+    <color name="colorGrayLight">#FAFAFA</color>
+    <color name="colorStarBlue">#09C6DF</color>
+    <color name="colorEndBlue">#0BCCE6</color>
+
 </resources>
