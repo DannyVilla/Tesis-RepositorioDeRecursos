@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "779490274159-ucv50gvjie1on7l6e92gf1815pk5aldv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tesis_rra",
+            "certificate_hash": "47bde09512b1c71cfa8024b45032d17fb226e9b1"
+          }
+        },
+        {
           "client_id": "779490274159-1kfr6hrtqopajakqn6helda6l4egqpo0.apps.googleusercontent.com",
           "client_type": 3
         }

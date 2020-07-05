@@ -59,7 +59,7 @@ public class Loguin extends AppCompatActivity {
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Loguin.this, HomePrincipal.class));
+                startActivity(new Intent(Loguin.this, Ejemplos.class));
             }
         });
 
