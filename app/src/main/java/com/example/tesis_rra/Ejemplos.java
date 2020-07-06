@@ -33,15 +33,17 @@ public class Ejemplos extends AppCompatActivity {
     //Firestore instance
     FirebaseFirestore db;
 
+    String pId, pTitle, pDescription, pLink;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ejemplos);
         //ActionBar and its title
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Agregar Objeto de Aprendizaje");
 
 
-   //     ActionBar actionBar = getSupportActionBar();
-     //   actionBar.setTitle("Agregar Datos");
 
         eTitulo = findViewById(R.id.titleEt);
         eDescripcion = findViewById(R.id.descriptionEt);
@@ -49,6 +51,29 @@ public class Ejemplos extends AppCompatActivity {
 
         eGuardarBtn = findViewById(R.id.saveBtn);
         eListBtn = findViewById(R.id.listBtn);
+
+        //Actualizar Elementos
+        final Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            //Actualizar
+
+            actionBar.setTitle("Actualizar Objeto");
+            eGuardarBtn.setText("Actualizar");
+            //get data
+            pId = bundle.getString("pId");
+            pTitle = bundle.getString("pTitle");
+            pDescription = bundle.getString("pDescription");
+            pLink = bundle.getString("pLink");
+            //set data
+            eTitulo.setText(pTitle);
+            eDescripcion.setText(pDescription);
+            eLink.setText(pLink);
+
+        }else{
+            //New Data
+            actionBar.setTitle("Agregar Objeto");
+            eGuardarBtn.setText("Guardar");
+        }
 
         //progress dialog
         pd = new ProgressDialog(this);
@@ -60,13 +85,32 @@ public class Ejemplos extends AppCompatActivity {
         eGuardarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //input data
-                String titulo = eTitulo.getText().toString().trim();
-                String descripcion = eDescripcion.getText().toString().trim();
-                String link = eLink.getText().toString().trim();
+                Bundle bundle1 = getIntent().getExtras();
+                if(bundle != null){
+                    //Actualizando
+                    //input data
+                    String id = pId;
+                    String title = eTitulo.getText().toString().trim();
+                    String description = eDescripcion.getText().toString().trim();
+                    String link = eLink.getText().toString().trim();
+                    //finction call to update data
 
-                //función para llamar al metodo cargar datos
-                CrearObjeto(titulo,descripcion,link);
+                    updateData(id, title, description, link);
+
+                }else{
+                    //Agregando nuevo objeto
+
+                    //input data
+                    String titulo = eTitulo.getText().toString().trim();
+                    String descripcion = eDescripcion.getText().toString().trim();
+                    String link = eLink.getText().toString().trim();
+
+                    //función para llamar al metodo cargar datos
+                    CrearObjeto(titulo,descripcion,link);
+
+                }
+
+
 
             }
         });
@@ -81,6 +125,34 @@ public class Ejemplos extends AppCompatActivity {
         });
 
 
+
+    }
+
+    private void updateData(String id, String title, String description, String link) {
+        pd.setTitle("Actualizando Objeto...");
+        pd.show();
+
+        db.collection("Documents").document(id)
+                .update("titulo", title, "descripción", description, "link", link)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        //called when update successfully
+                        pd.dismiss();
+                        Toast.makeText(Ejemplos.this, "Actualizado...", Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //called when there is any error
+                        pd.dismiss();
+                        Toast.makeText(Ejemplos.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
 
     }
 

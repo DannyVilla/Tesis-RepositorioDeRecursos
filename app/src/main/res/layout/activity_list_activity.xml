@@ -5,11 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ListActivity">
-    
+
+    <include
+        layout="@layout/appbar"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_objetos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addBtn"

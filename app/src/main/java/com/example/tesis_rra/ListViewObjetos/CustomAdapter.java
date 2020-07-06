@@ -1,6 +1,9 @@
 package com.example.tesis_rra.ListViewObjetos;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tesis_rra.Ejemplos;
 import com.example.tesis_rra.ListActivity;
 import com.example.tesis_rra.R;
 
@@ -53,8 +57,40 @@ public class CustomAdapter extends RecyclerView.Adapter<ViewHolder> {
             }
 
             @Override
-            public void onItemLongClick(View view, int position) {
+            public void onItemLongClick(View view, final int position) {
                 //this will be called when user long click item
+
+                //Creando un AlertDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(listActivity);
+                //Options to display in dialog
+                String[] options = {"Actualizar", "Eliminar"};
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0){
+                            //Actualizar
+                            String id = modelObjetoList.get(position).getId();
+                            String title = modelObjetoList.get(position).getTitulo();
+                            String description = modelObjetoList.get(position).getDescripcion();
+                            String link = modelObjetoList.get(position).getLink();
+
+                            //intent to start activity
+                            Intent intent = new Intent(listActivity, Ejemplos.class);
+                            //put data in intent
+                            intent.putExtra("pId", id);
+                            intent.putExtra("pTitle", title);
+                            intent.putExtra("pDescription", description);
+                            intent.putExtra("pLink", link);
+                            //start activity
+                            listActivity.startActivity(intent);
+                        }
+                        if (which ==1){
+                            //Eliminar
+
+
+                        }
+                    }
+                }).create().show();
             }
         });
 
