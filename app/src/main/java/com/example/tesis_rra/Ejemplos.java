@@ -133,7 +133,8 @@ public class Ejemplos extends AppCompatActivity {
         pd.show();
 
         db.collection("Documents").document(id)
-                .update("titulo", title, "descripción", description, "link", link)
+                .update("titulo", title, "search", title.toLowerCase(),
+                        "descripción", description, "link", link)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -166,6 +167,7 @@ public class Ejemplos extends AppCompatActivity {
         Map<String, Object> doc = new HashMap<>();
         doc.put("id", id); //Id del dato
         doc.put("titulo", titulo);
+        doc.put("search", titulo.toLowerCase());
         doc.put("descripción", descripcion);
         doc.put("link",link);
 
@@ -191,4 +193,8 @@ public class Ejemplos extends AppCompatActivity {
                 });
 
     }
+
+
+    //menu
+
 }

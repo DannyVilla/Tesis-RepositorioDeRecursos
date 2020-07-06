@@ -3,12 +3,16 @@ package com.example.tesis_rra;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -158,5 +162,87 @@ public class ListActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    //menu
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //inflating menu_main.xml
+        getMenuInflater().inflate(R.menu.manu_main,menu);
+        //SearchView
+        MenuItem item = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                //Called when we press search button
+                searchData(s); //finction call with string entered in searchview as parametes
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                //Called as and when we type even a single letter
+
+                return false;
+            }
+        });
+
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void searchData(String s) {
+        pd.setTitle("Buscando...");
+        pd.show();
+
+        db.collection("Documents").whereEqualTo("search", s.toLowerCase())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        //called when searching is succedded
+                        modelObjetoList.clear();;
+                        pd.dismiss();
+
+                        //show data
+                        for (DocumentSnapshot doc: task.getResult()){
+                            ModelObjeto modelObjeto = new ModelObjeto(doc.getString("id"),
+                                    doc.getString("titulo"),
+                                    doc.getString("descripción"),
+                                    doc.getString("link"));
+                            modelObjetoList.add(modelObjeto);
+
+                        }
+                        //adapter
+                        adapter = new CustomAdapter(ListActivity.this, modelObjetoList);
+
+                        //set adapter to recyclerview
+                        eRecyclerView.setAdapter(adapter);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //when theres is any error
+                        pd.dismiss();
+                        //get and show error message
+                        Toast.makeText(ListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //handle other menu item click here
+        if (item.getItemId() == R.id.action_settings){
+            Toast.makeText(this, "Configuración", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
