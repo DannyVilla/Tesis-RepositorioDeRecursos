@@ -96,6 +96,7 @@ public class ListActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        modelObjetoList.clear();
                         //called when data is retrieved
                         pd.dismiss();
                         //show data
@@ -128,5 +129,34 @@ public class ListActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public void EliminarObjeto(int index){
+        //set titulo of progress dialog
+        pd.setTitle("Eliminando Datos");
+        //show progress dialog
+        pd.show();
+
+        db.collection("Documents").document(modelObjetoList.get(index).getId())
+                .delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        //called when deleted successfully
+                        Toast.makeText(ListActivity.this, "Eliminando...", Toast.LENGTH_SHORT).show();
+                        //Actualizando datos
+                        showData();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //Called when there is any error
+                        //get and show error message
+                        pd.dismiss();
+                        Toast.makeText(ListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
     }
 }

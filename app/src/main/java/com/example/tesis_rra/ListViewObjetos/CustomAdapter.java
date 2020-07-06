@@ -86,6 +86,7 @@ public class CustomAdapter extends RecyclerView.Adapter<ViewHolder> {
                         }
                         if (which ==1){
                             //Eliminar
+                            listActivity.EliminarObjeto(position);
 
 
                         }
