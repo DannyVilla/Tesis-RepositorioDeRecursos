@@ -86,7 +86,7 @@ public class Loguin extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    startActivity(new Intent(Loguin.this, HomePrincipal.class));
+                    startActivity(new Intent(Loguin.this, Home.class));
                     Toast.makeText(Loguin.this,"Inicio de sesión correcto",Toast.LENGTH_SHORT).show();
                     finish();
                 }

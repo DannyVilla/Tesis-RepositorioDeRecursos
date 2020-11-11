@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bn_home"
+        android:title="Home"
+        android:icon="@drawable/ic_menu_home"/>
+
+    <item
+        android:id="@+id/bn_Perfil"
+        android:title="Perfil"
+        android:icon="@drawable/ic_menu_perfil"/>
+
+    <item
+        android:id="@+id/bn_Repositorios"
+        android:title="Repositorios"
+        android:icon="@drawable/ic_menu_repositorios"/>
+
+    <item
+        android:id="@+id/bn_info"
+        android:title="Información"
+        android:icon="@drawable/ic_menu_informacion"/>
+
+</menu>
