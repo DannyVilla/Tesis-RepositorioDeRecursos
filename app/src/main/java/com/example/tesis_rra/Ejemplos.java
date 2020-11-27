@@ -194,7 +194,4 @@ public class Ejemplos extends AppCompatActivity {
 
     }
 
-
-    //menu
-
 }
